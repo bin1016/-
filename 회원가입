@@ -1,0 +1,465 @@
+<html>
+    <style>
+          body {
+            background-color:lightblue;
+        }
+        main {
+            height: 670px;
+            width: 700px;
+            background-color:paleturquoise;
+            position: absolute;
+            top: 150px;
+            left: 640px;
+            border-radius: 10px;
+            z-index: 0;
+        }
+        header{
+            top: 180px;
+            left: 930px;
+            position: absolute;
+            z-index: 1;
+        }
+        h1{
+            padding: 0px;
+            margin: 0px;
+        }
+        hr{
+            width: 480px;
+            position: absolute;
+            left: -180px;
+            color: white;
+        }
+        #name{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 100px;
+            left: 100px;
+        }
+        #email{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 200px;
+            left: 100px;
+        }
+        #age{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 300px;
+            left: 100px;
+        }
+        #pass{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 400px;
+            left: 100px;
+        }
+        #check{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 500px;
+            left: 100px;
+        }
+        form{
+            padding: 0px;
+            margin: 0px;
+            border: solid 2px white;
+            color: skyblue;
+            width: 300px;
+        }
+        input{
+            border-radius: 5px;
+            padding: 0px;
+            margin: 0px;
+            border: solid 2px white;
+            color: black;
+            width: 500px;
+            height: 30px;
+            font-weight: bold;
+            font-size: large;
+        }
+        h3{
+            margin: 0;
+        }
+        h4{
+            color: red;
+            margin: 0;
+            display: none;
+        }
+        #button1{
+            position: absolute;
+            padding: 0px;
+            margin: 0px;
+            top: 595px;
+            left: 260px;
+            width: 200px;
+            height: 40px;
+            border-radius: 8px;
+            border: solid 2px darkgray;
+            color: white;
+            background-color: darkgrey;
+        }
+        #name_success{
+            color: green;
+            display: none;
+        }
+        #name_fail{
+            color: red;
+            display: none;
+        }
+        #email_success{
+            color: green;
+            display: none;
+        }
+        #email_fail{
+            color: red;
+            display: none;
+        }
+        #age_success{
+            color: green;
+            display: none;
+        }
+        .age_fail{
+            color: red;
+            display: none;
+        }
+
+        #pass_success{
+            color: green;
+            display: none;
+        }
+        #pass_fail1{
+            color: red;
+            display: none;
+        }
+        #pass_fail2{
+            color: red;
+            display: none;
+        }
+        #pass_fail3{
+            color: red;
+            display: none;
+        }
+
+        #check_success{
+            color: green;
+            display: none;
+        }
+        #check_fail{
+            color: red;
+            display: none;
+        }
+
+        .modal-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;    /* 수직 정렬 */
+            justify-content: center;    /* 수평 정렬 */
+        }
+
+        .modal {
+            background: white;
+            padding: 24px 16px;
+            border-radius: 4px;
+            width: 500px;
+            height: 150px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .modal p {
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 470px; /* 상단 여백 */
+            left: 850px; /* 오른쪽 여백 */
+        }
+
+        .close-wrapper {
+            text-align: right;
+            height: 50%;
+            position: fixed;
+            top: 530px; /* 상단 여백 */
+            left: 1170px; /* 오른쪽 여백 */
+        }
+    </style>
+    <head>
+        <title>회원가입</title>
+    </head>
+    <body>
+        <header>
+            <h1>회원가입</h1>
+            <hr style="border: solid 1px white">
+        </header>
+        <main>
+            <div id="name">
+                <h3>이름</h3>
+                    <input id="name_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="name_success">멋진 이름이네요!</div>
+                <div id="name_fail">필수 입력 항목입니다!</div>
+            </div>
+
+            <div id="email">
+                <h3>이메일</h3>
+                    <input id="email_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="email_success">올바른 이메일 형식입니다!</div>
+                <div id="email_fail">올바른 이메일 형식이 아닙니다!</div>
+            </div>
+
+            <div id="age">
+                <h3>나이</h3>
+                    <input id="age_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="age_success">올바른 나이 형식입니다!</div>
+                <div id="age_fail1" class="age_fail">나이는, 숫자를 입력받아야 합니다.</div>
+                <div id="age_fail2" class="age_fail">나이는, 음수가 될 수 없습니다.</div>
+                <div id="age_fail3" class="age_fail">나이는, 소수가 될 수 없습니다.</div>
+                <div id="age_fail4" class="age_fail">우리 영화 사이트는 19살 이상만 가입이 가능합니다.</div>
+            </div>
+
+            <div id="pass">
+                <h3>비밀번호</h3>
+                    <input id="pass_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="pass_success">올바른 비밀번호입니다!</div>
+                <div id="pass_fail1">비밀번호는 최소 4자리 이상이어야합니다.</div>
+                <div id="pass_fail2">비밀번호는 최대 12자리까지 가능합니다.</div>
+                <div id="pass_fail3">영어, 숫자, 특수문자를 모두 조합해서 비밀번호를 작성해야 합니다.</div>
+            </div>
+
+            <div id="check">
+                <h3>비밀번호 확인</h3>
+                    <input id="check_input" type="text" style="border: solid 2px white; background: transparent;">
+                <div id="check_success">비밀번호가 일치합니다!</div>
+                <div id="check_fail">비밀번호가 일치하지 않습니다.</div>
+            </div>
+            
+            <button id="button1" disabled = "disabled">가입하기</button>
+        </main>
+        <div class="modal-wrapper">
+            <div class="modal">
+              <div class="modal-title">가입 성공!</div>
+              <p>UMC 챌린저 가입을 축하합니다!!</p>
+              <div class="close-wrapper">
+                <button id="button2">닫기</button>
+              </div>
+            </div>
+          </div>
+        <script>
+            // HTML 문서가 로드되면 실행되는 함수
+            document.addEventListener('DOMContentLoaded', function () {
+                // 이름 입력란 객체 가져오기
+                const nameInput = document.getElementById('name_input');
+                // 가입하기 버튼 객체 가져오기
+                const joinButton = document.getElementById('button1');
+
+                // 이름 입력란에 입력이 발생할 때마다 실행되는 함수
+                nameInput.addEventListener('input', function () {
+                    // 이름 입력란의 값이 존재하는지 확인
+                    if (nameInput.value.trim() !== '') {
+                        // 이름 입력란의 값이 존재하면 '멋진 이름이네요!' 메시지 표시
+                        document.getElementById('name_success').style.display = 'block';
+                    } else {
+                        // 이름 입력란의 값이 없으면 '필수 입력 항목입니다.' 메시지 표시
+                        document.getElementById('name_fail').style.display = 'block';
+                    }
+                });
+
+                // 가입하기 버튼을 클릭할 때 실행되는 함수
+                joinButton.addEventListener('click', function () {
+                    // 모든 필수 입력란이 채워져 있는지 확인
+                    const name = nameInput.value.trim();
+                    // 다른 필수 입력란들의 값을 가져와서 확인하는 로직 추가
+                    // 이메일, 나이, 비밀번호 등의 입력란의 값 확인
+
+                    // 예시로 이름만 확인하는 코드 작성
+                    if (name !== '') {
+                        // 모든 필수 입력란이 채워져 있으면 모달창 표시
+                        document.querySelector('.modal-wrapper').style.display = 'flex';
+                    } else {
+                        // 필수 입력란 중 하나라도 비어있으면 사용자에게 알림
+                        alert('모든 필수 입력란을 채워주세요.');
+                    }
+                });
+            });
+             document.addEventListener('DOMContentLoaded', function () {
+        // 이메일 입력란 객체 가져오기
+        const emailInput = document.getElementById('email_input');
+
+        // 이메일 입력란에 입력이 발생할 때마다 실행되는 함수
+        emailInput.addEventListener('input', function () {
+            // 이메일 형식을 검사하는 정규표현식
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // 이메일 입력란의 값
+            const email = emailInput.value.trim();
+
+            // 이메일 형식 검사
+            if (emailPattern.test(email)) {
+                // 올바른 이메일 형식일 경우 '올바른 이메일 형식입니다!' 메시지 표시
+                document.getElementById('email_success').style.display = 'block';
+                document.getElementById('email_fail').style.display = 'none';
+            } else {
+                // 올바르지 않은 이메일 형식일 경우 '올바른 이메일 형식이 아닙니다!' 메시지 표시
+                document.getElementById('email_success').style.display = 'none';
+                document.getElementById('email_fail').style.display = 'block';
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // 나이 입력란 객체 가져오기
+        const ageInput = document.getElementById('age_input');
+
+        // 나이 입력란에 입력이 발생할 때마다 실행되는 함수
+        ageInput.addEventListener('input', function () {
+            // 나이 입력란의 값
+            const age = parseFloat(ageInput.value.trim());
+
+            // 입력된 값이 숫자인지 확인
+            if (!isNaN(age)) {
+                // 입력된 값이 20 이상인지 확인
+                if (age >= 20) {
+                    // 20 이상의 숫자일 경우 '올바른 나이 형식입니다!' 메시지 표시
+                    document.getElementById('age_success').style.display = 'block';
+                    // 나이 제한 메시지 숨기기
+                    document.querySelectorAll('.age_fail').forEach(function (element) {
+                        element.style.display = 'none';
+                    });
+                } else {
+                    // 20 미만의 숫자일 경우 '우리 영화 사이트는 19살 이상만 가입이 가능합니다.' 메시지 표시
+                    document.getElementById('age_success').style.display = 'none';
+                    document.getElementById('age_fail4').style.display = 'block';
+                }
+
+                // 입력된 값이 소수인지 확인
+                if (age.toString().includes('.')) {
+                    // 입력된 값에 소수가 포함되어 있을 경우 '나이는 소수가 될 수 없습니다.' 메시지 표시
+                    document.getElementById('age_fail3').style.display = 'block';
+                } else {
+                    // 소수가 포함되어 있지 않으면 메시지 숨기기
+                    document.getElementById('age_fail3').style.display = 'none';
+                }
+            } else {
+                // 숫자가 아닌 값이 입력된 경우 메시지 숨기기
+                document.querySelectorAll('.age_fail').forEach(function (element) {
+                    element.style.display = 'none';
+                });
+            }
+        });
+    });
+document.addEventListener('DOMContentLoaded', function () {
+        // 비밀번호 입력란 객체 가져오기
+        const passInput = document.getElementById('pass_input');
+
+        // 비밀번호 입력란에 입력이 발생할 때마다 실행되는 함수
+        passInput.addEventListener('input', function () {
+            // 비밀번호 입력란의 값
+            const password = passInput.value.trim();
+
+            // 비밀번호가 4자리 이상인지 확인
+            if (password.length >= 4) {
+                // 비밀번호에 영문자, 숫자, 특수문자가 모두 포함되어 있는지 확인하는 정규표현식
+                const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]+$/;
+
+                // 비밀번호 형식을 확인
+                if (passwordPattern.test(password)) {
+                    // 올바른 비밀번호 형식일 경우 '올바른 비밀번호입니다!' 메시지 표시
+                    document.getElementById('pass_success').style.display = 'block';
+                    // 비밀번호 관련 메시지 숨기기
+                    document.getElementById('pass_fail1').style.display = 'none';
+                    document.getElementById('pass_fail2').style.display = 'none';
+                    document.getElementById('pass_fail3').style.display = 'none';
+                } else {
+                    // 영어, 숫자, 특수문자를 모두 포함하지 않는 경우 '영어, 숫자, 특수문자를 모두 조합해서 비밀번호를 작성해야 합니다.' 메시지 표시
+                    document.getElementById('pass_success').style.display = 'none';
+                    document.getElementById('pass_fail3').style.display = 'block';
+                }
+            } else {
+                // 비밀번호가 4자리 미만일 경우 '비밀번호는 최소 4자리 이상이어야합니다.' 메시지 표시
+                document.getElementById('pass_success').style.display = 'none';
+                document.getElementById('pass_fail1').style.display = 'block';
+                document.getElementById('pass_fail3').style.display = 'none';
+            }
+        });
+    });
+     document.addEventListener('DOMContentLoaded', function () {
+        // 비밀번호 확인 입력란 객체 가져오기
+        const checkInput = document.getElementById('check_input');
+        // 비밀번호 입력란 객체 가져오기
+        const passInput = document.getElementById('pass_input');
+
+        // 비밀번호 확인 입력란에 입력이 발생할 때마다 실행되는 함수
+        checkInput.addEventListener('input', function () {
+            // 비밀번호 확인 입력란의 값
+            const confirmPassword = checkInput.value.trim();
+            // 비밀번호 입력란의 값
+            const password = passInput.value.trim();
+
+            // 비밀번호 확인과 비밀번호가 일치하는지 확인
+            if (confirmPassword === password) {
+                // 비밀번호가 일치할 경우 '비밀번호가 일치합니다!' 메시지 표시
+                document.getElementById('check_success').style.display = 'block';
+                document.getElementById('check_fail').style.display = 'none';
+            } else {
+                // 비밀번호가 일치하지 않을 경우 '비밀번호가 일치하지 않습니다.' 메시지 표시
+                document.getElementById('check_success').style.display = 'none';
+                document.getElementById('check_fail').style.display = 'block';
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // 가입하기 버튼 객체 가져오기
+        const joinButton = document.getElementById('button1');
+
+        // 가입하기 버튼을 클릭할 때 실행되는 함수
+        joinButton.addEventListener('click', function () {
+            // 모든 필수 입력란이 올바른 형식으로 작성되었는지 확인
+            const nameSuccess = document.getElementById('name_success').style.display === 'block';
+            const emailSuccess = document.getElementById('email_success').style.display === 'block';
+            const ageSuccess = document.getElementById('age_success').style.display === 'block';
+            const passSuccess = document.getElementById('pass_success').style.display === 'block';
+            const checkSuccess = document.getElementById('check_success').style.display === 'block';
+
+            // 모든 조건을 충족하는지 확인
+            if (nameSuccess && emailSuccess && ageSuccess && passSuccess && checkSuccess) {
+                // 모달을 표시하는 함수 호출
+                showModal();
+            } else {
+                // 필수 입력란 중 하나라도 올바른 형식이 아닌 경우 사용자에게 알림
+                alert('모든 필수 입력란을 올바르게 작성해주세요.');
+            }
+        });
+
+        // 모달을 표시하는 함수
+        function showModal() {
+            // 모달 창 객체 가져오기
+            const modalWrapper = document.querySelector('.modal-wrapper');
+            // 모달 창 표시
+            modalWrapper.style.display = 'flex';
+        }
+
+        // 닫기 버튼 객체 가져오기
+        const closeButton = document.getElementById('button2');
+
+        // 닫기 버튼을 클릭할 때 실행되는 함수
+        closeButton.addEventListener('click', function () {
+            // 모달 창 객체 가져오기
+            const modalWrapper = document.querySelector('.modal-wrapper');
+            // 모달 창 닫기
+            modalWrapper.style.display = 'none';
+        });
+    });
+
+        </script>
+    </body>
+</html>
