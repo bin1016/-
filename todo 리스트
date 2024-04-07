@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mission2</title>
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+        h1 {
+            text-align: center;
+        }
+        input {
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            height: 30px;
+            width: 65%;
+        }
+        .list {
+            display: inline-block;
+            margin-left: 10%;
+            width: 35%;
+            vertical-align: top;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>UMC Study Plan</h1>
+    <hr>
+    <form id="toDoForm">
+        <input type="text" id="toDo">
+    </form>
+    <div class="list" id="toDoListComponent">
+        <p>해야 할 일</p>
+    </div>
+    <div class="list" id="doneListComponent">
+        <p>해낸 일</p>
+    </div>
+    <script>
+        class ToDoList {
+            constructor() {
+                this.toDoList = document.querySelector("#toDoListComponent");
+                this.doneList = document.querySelector("#doneListComponent");
+                this.form = document.querySelector("#toDoForm");
+                this.input = document.querySelector("#toDo");
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+            }
+
+            handleSubmit(event) {
+                event.preventDefault();
+                const item = this.createItem(this.input.value);
+                this.toDoList.appendChild(item);
+                this.input.value = '';
+            }
+
+            createItem(text) {
+                const item = document.createElement('div');
+                const textElement = document.createElement('span');
+                const doneButton = document.createElement('button');
+
+                textElement.textContent = text;
+                doneButton.textContent = '완료';
+
+                doneButton.addEventListener('click', () => {
+                    this.moveToDone(item);
+                });
+
+                item.appendChild(textElement);
+                item.appendChild(doneButton);
+
+                return item;
+            }
+
+            moveToDone(item) {
+                const removeButton = document.createElement('button');
+                removeButton.textContent = '삭제';
+                removeButton.addEventListener('click', () => {
+                    this.doneList.removeChild(item);
+                });
+
+                item.removeChild(item.querySelector('button'));
+                this.doneList.appendChild(item);
+                item.appendChild(removeButton);
+            }
+        }
+
+        const toDoList = new ToDoList();
+    </script>
+</body>
+</html>
